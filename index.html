@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PolpAI Space - Ton IA personnelle. Ta memoire. Ta souverainete.</title>
+  <meta name="description" content="PolpAI Space est ton espace AI personnel. MonIAaMoi t'accompagne avec memoire souveraine 5 niveaux, BYOS, chiffrement AES-256. Tes donnees restent les tiennes.">
+  <meta property="og:title" content="PolpAI Space - Ton workspace AI souverain">
+  <meta property="og:description" content="MonIAaMoi + BYOS + memoire L5 chiffree. L'IA personnelle qui travaille pour toi sans vendre tes donnees.">
+  <meta property="og:url" content="https://polpai.space">
+  <meta property="og:image" content="https://polpai.ai/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://polpai.space">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://polpai.ai/icon-32.png">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    :root{--pp:#0A84FF;--pp-glow:rgba(10,132,255,0.15);--miam:#F72585;--miam-glow:rgba(247,37,133,0.12);--bg:#030507;--surface:#0A0F1C;--elevated:#111827;--border:#1F2937;--text:#F9FAFB;--text2:#D1D5DB;--muted:#6B7280;--success:#10B981}
+    *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+    a{color:var(--pp);text-decoration:none}.container{max-width:1140px;margin:0 auto;padding:0 2rem}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(3,5,7,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0.875rem 0}
+    nav .container{display:flex;align-items:center;justify-content:space-between}
+    .nav-brand{display:flex;align-items:center;gap:0.75rem;font-weight:700;font-size:1.25rem;color:var(--text)}
+    .nav-links{display:flex;gap:1.5rem;align-items:center}.nav-links a{color:var(--text2);font-size:0.875rem}.nav-links a:hover{color:var(--pp)}
+    .btn{padding:0.6rem 1.2rem;border-radius:8px;font-weight:600;font-size:0.875rem;cursor:pointer;transition:all 0.3s;border:none;display:inline-flex;align-items:center;gap:0.5rem}
+    .btn-p{background:var(--miam);color:#fff}.btn-p:hover{background:#ff4da6;box-shadow:0 0 24px rgba(247,37,133,0.4)}
+    .btn-g{background:transparent;color:var(--text);border:1px solid var(--border)}.btn-g:hover{border-color:var(--miam);color:var(--miam)}
+    section{padding:5rem 0}
+    .s-label{font-size:0.75rem;font-weight:600;color:var(--miam);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem}
+    .s-title{font-family:'DM Serif Display',serif;font-size:2.25rem;margin-bottom:0.75rem;line-height:1.15}
+    .s-desc{color:var(--text2);font-size:1rem;max-width:600px;margin-bottom:2.5rem;line-height:1.6}
+
+    /* HERO */
+    .hero{min-height:100vh;display:flex;align-items:center;padding:7rem 2rem 4rem;background:radial-gradient(ellipse at 50% 30%,rgba(247,37,133,0.04) 0%,transparent 60%)}
+    .hero-split{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+    .hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4.5vw,3.25rem);line-height:1.1;margin-bottom:1.25rem}
+    .hero h1 .accent{color:var(--miam)}
+    .hero p{color:var(--text2);font-size:1.05rem;line-height:1.6;margin-bottom:1.5rem}
+    .hero-buttons{display:flex;gap:0.75rem;flex-wrap:wrap}
+
+    /* WORKSPACE MOCKUP */
+    .workspace{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+    .ws-bar{background:var(--elevated);padding:0.6rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.5rem;font-size:0.75rem;color:var(--muted)}
+    .ws-bar .dot{width:10px;height:10px;border-radius:50%;background:var(--border);margin-right:0.25rem}
+    .ws-body{display:grid;grid-template-columns:200px 1fr;min-height:340px}
+    .ws-sidebar{border-right:1px solid var(--border);padding:1rem}
+    .ws-nav-item{padding:0.5rem 0.75rem;border-radius:8px;font-size:0.813rem;color:var(--text2);cursor:default;margin-bottom:0.25rem;transition:all 0.2s}
+    .ws-nav-item.active{background:var(--miam-glow);color:var(--miam);font-weight:600}
+    .ws-nav-item:hover{background:var(--elevated)}
+    .ws-content{padding:1.25rem}
+    .ws-greeting{font-size:1rem;font-weight:600;margin-bottom:0.75rem}
+    .ws-memory{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;margin-bottom:1rem}
+    .ws-mem-card{background:var(--elevated);border-radius:8px;padding:0.75rem;font-size:0.688rem}
+    .ws-mem-label{color:var(--miam);font-weight:600;font-size:0.625rem;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem}
+    .ws-mem-val{color:var(--text2)}
+    .ws-agents{display:flex;gap:0.5rem;flex-wrap:wrap}
+    .ws-agent-badge{background:var(--elevated);border:1px solid var(--border);border-radius:999px;padding:0.25rem 0.625rem;font-size:0.688rem;color:var(--text2)}
+    .ws-agent-badge.on{border-color:var(--success);color:var(--success)}
+
+    /* MEMORY LEVELS */
+    .mem-levels{display:grid;gap:1px;background:var(--border);border-radius:16px;overflow:hidden;margin-top:2rem}
+    .mem-level{background:var(--surface);padding:1.5rem 2rem;display:grid;grid-template-columns:auto 1fr auto;gap:1.5rem;align-items:center}
+    .mem-level:hover{background:var(--elevated)}
+    .mem-num{width:36px;height:36px;border-radius:50%;background:var(--miam-glow);color:var(--miam);font-weight:700;font-size:0.875rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .mem-level h4{font-size:0.938rem;margin-bottom:0.25rem}
+    .mem-level p{color:var(--text2);font-size:0.813rem;line-height:1.4}
+    .mem-depth{font-size:0.75rem;color:var(--muted);text-align:right;min-width:80px}
+
+    /* BYOS */
+    .byos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;margin-top:2rem}
+    .byos-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;transition:all 0.3s}
+    .byos-card:hover{border-color:var(--miam)}
+    .byos-icon{font-size:1.75rem;margin-bottom:0.75rem}
+    .byos-card h4{font-size:0.938rem;margin-bottom:0.375rem}
+    .byos-card p{color:var(--text2);font-size:0.813rem;line-height:1.45}
+
+    /* GUARANTEES */
+    .guarantees{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin-top:2rem}
+    .guar{padding:1.5rem;display:flex;gap:1rem;align-items:flex-start}
+    .guar-icon{font-size:1.5rem;flex-shrink:0;margin-top:0.1rem}
+    .guar h4{font-size:0.938rem;margin-bottom:0.375rem}
+    .guar p{color:var(--text2);font-size:0.813rem;line-height:1.45}
+
+    /* WL */
+    .wl{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;max-width:460px;margin:0 auto}
+    .wl input[type="email"]{flex:1;min-width:200px;padding:0.75rem 1rem;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:inherit;font-size:0.875rem;outline:none}
+    .wl input:focus{border-color:var(--miam)}
+    .wl input::placeholder{color:var(--muted)}
+    .wl-msg{font-size:0.813rem;margin-top:0.5rem;padding:0.375rem 0.75rem;border-radius:6px;display:inline-block}
+    .wl-msg.ok{color:var(--success);background:rgba(16,185,129,0.1)}
+
+    .domains{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1rem}
+    .domains a{color:var(--text2);font-size:0.75rem}.domains a:hover{color:var(--pp)}.domains a.active{color:var(--miam);font-weight:600}
+    footer{padding:2.5rem 0;text-align:center;border-top:1px solid var(--border);color:var(--muted);font-size:0.75rem}
+    @media(max-width:768px){.hero-split{grid-template-columns:1fr}.nav-links{display:none}.ws-body{grid-template-columns:1fr}.ws-sidebar{display:none}.ws-memory{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="/" class="nav-brand">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="28" height="28" fill="none"><path d="M32 6C18 6 8 16 8 30c0 10 6 18 14 22l-2 6c0 1 1 2 2 2h4l4-4h4l4 4h4c1 0 2-1 2-2l-2-6c8-4 14-12 14-22C56 16 46 6 32 6z" fill="#F72585"/><ellipse cx="24" cy="28" rx="6" ry="7" fill="white"/><ellipse cx="25.5" cy="29" rx="3" ry="4" fill="#0A0F1C"/><circle cx="27" cy="27" r="1.5" fill="white"/><ellipse cx="40" cy="28" rx="6" ry="7" fill="white"/><ellipse cx="41.5" cy="29" rx="3" ry="4" fill="#0A0F1C"/><circle cx="43" cy="27" r="1.5" fill="white"/><path d="M28 36c0 0 2 3 4 3s4-3 4-3" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+        polpai<span style="color:var(--muted);font-size:0.875rem;margin-left:0.25rem">.space</span>
+      </a>
+      <div class="nav-links">
+        <a href="#memory">Memoire</a>
+        <a href="#byos">Stockage</a>
+        <a href="#guarantees">Garanties</a>
+        <a href="https://polpai.ai">Produit</a>
+        <a href="https://polpai.io">Dashboard</a>
+        <button class="btn btn-p" onclick="document.getElementById('wl-section').scrollIntoView({behavior:'smooth'})">Acces anticipe</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-split">
+        <div>
+          <div class="s-label">Workspace souverain</div>
+          <h1>Ton IA.<br>Ta memoire.<br><span class="accent">Ta souverainete.</span></h1>
+          <p>PolpAI Space est ton espace AI personnel alimente par MonIAaMoi -- une IA qui apprend qui tu es, coordonne les tentacules en ton nom, et garde tout chiffre sur TON infrastructure.</p>
+          <p>Elle ne vend pas tes donnees. Elle ne les partage pas. Elle ne les utilise pas pour entrainer d'autres modeles. Elle travaille <em>pour toi</em>.</p>
+          <div class="hero-buttons">
+            <a href="#wl-section" class="btn btn-p">Rejoindre la liste d'attente &#8594;</a>
+            <a href="#memory" class="btn btn-g">Voir la memoire L5</a>
+          </div>
+        </div>
+        <div class="workspace">
+          <div class="ws-bar"><div class="dot"></div><div class="dot"></div><div class="dot"></div>MonIAaMoi -- Workspace</div>
+          <div class="ws-body">
+            <div class="ws-sidebar">
+              <div class="ws-nav-item active">Tableau de bord</div>
+              <div class="ws-nav-item">Ma memoire</div>
+              <div class="ws-nav-item">Mes agents</div>
+              <div class="ws-nav-item">Mes documents</div>
+              <div class="ws-nav-item">Mes finances</div>
+              <div class="ws-nav-item">Mes alertes</div>
+              <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)">
+                <div class="ws-nav-item">Stockage BYOS</div>
+                <div class="ws-nav-item">Securite</div>
+              </div>
+            </div>
+            <div class="ws-content">
+              <div class="ws-greeting">Bonjour. 8 tentacules actifs.</div>
+              <div class="ws-memory">
+                <div class="ws-mem-card"><div class="ws-mem-label">Profil</div><div class="ws-mem-val">Connu depuis 47 jours</div></div>
+                <div class="ws-mem-card"><div class="ws-mem-label">Memoire</div><div class="ws-mem-val">L5 -- Relationnel</div></div>
+                <div class="ws-mem-card"><div class="ws-mem-label">Stockage</div><div class="ws-mem-val">Supabase / BYOS</div></div>
+              </div>
+              <div style="font-size:0.75rem;color:var(--muted);margin-bottom:0.5rem">Agents actifs</div>
+              <div class="ws-agents">
+                <span class="ws-agent-badge on">Deal Hunter</span>
+                <span class="ws-agent-badge on">Gift Sensei</span>
+                <span class="ws-agent-badge on">Wallet Guardian</span>
+                <span class="ws-agent-badge">Alpha Radar</span>
+                <span class="ws-agent-badge on">Doc Agent</span>
+                <span class="ws-agent-badge on">Automator</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMORY LEVELS -->
+  <section id="memory" style="background:var(--surface)">
+    <div class="container">
+      <div class="s-label">Memoire profonde</div>
+      <h2 class="s-title">5 niveaux de connaissance.</h2>
+      <p class="s-desc">MonIAaMoi ne memorise pas juste des faits. Elle comprend qui tu es, comment tu penses, et ce qui compte pour toi. Chaque couche est chiffree. Chaque couche est exportable.</p>
+      <div class="mem-levels">
+        <div class="mem-level">
+          <div class="mem-num">L1</div>
+          <div>
+            <h4>Contexte immediat</h4>
+            <p>Ce dont tu parles maintenant. La conversation en cours. Effacee automatiquement apres la session.</p>
+          </div>
+          <div class="mem-depth">Session</div>
+        </div>
+        <div class="mem-level">
+          <div class="mem-num">L2</div>
+          <div>
+            <h4>Preferences et habitudes</h4>
+            <p>Tes categories d'achat favorites, tes plages horaires actives, tes canaux preferes, tes seuils d'alerte.</p>
+          </div>
+          <div class="mem-depth">Persistant</div>
+        </div>
+        <div class="mem-level">
+          <div class="mem-num">L3</div>
+          <div>
+            <h4>Objectifs et projets</h4>
+            <p>Tes projets en cours, tes objectifs financiers, tes listes d'achats planifies, tes deadlines.</p>
+          </div>
+          <div class="mem-depth">Long terme</div>
+        </div>
+        <div class="mem-level">
+          <div class="mem-num">L4</div>
+          <div>
+            <h4>Valeurs et contraintes</h4>
+            <p>Ce qui est non-negociable pour toi. Budget max, marques a eviter, convictions ethiques, priorites de vie.</p>
+          </div>
+          <div class="mem-depth">Profond</div>
+        </div>
+        <div class="mem-level">
+          <div class="mem-num">L5</div>
+          <div>
+            <h4>Memoire relationnelle</h4>
+            <p>Les personnes importantes dans ta vie, leurs preferences, tes relations avec elles. Utilisee pour les cadeaux, les anniversaires, les recommandations contextuelles.</p>
+          </div>
+          <div class="mem-depth">Relationnel</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BYOS -->
+  <section id="byos">
+    <div class="container">
+      <div class="s-label">BYOS -- Bring Your Own Storage</div>
+      <h2 class="s-title">Ton stockage. Tes regles.</h2>
+      <p class="s-desc">Connecte ton propre service de stockage. Tes donnees et ta memoire restent chez toi -- chiffrees, portables, exportables a tout moment.</p>
+      <div class="byos-grid">
+        <div class="byos-card">
+          <div class="byos-icon">&#9889;</div>
+          <h4>Supabase</h4>
+          <p>Connexion en 30 secondes. Projet existant ou nouveau. Migrations incluses.</p>
+        </div>
+        <div class="byos-card">
+          <div class="byos-icon">&#128024;</div>
+          <h4>PostgreSQL</h4>
+          <p>Ton serveur PostgreSQL, n'importe ou. Cloud, on-premise, bare metal.</p>
+        </div>
+        <div class="byos-card">
+          <div class="byos-icon">&#128756;</div>
+          <h4>Amazon S3</h4>
+          <p>Stockage de fichiers et documents dans ton bucket S3 ou compatible (MinIO, R2).</p>
+        </div>
+        <div class="byos-card">
+          <div class="byos-icon">&#128196;</div>
+          <h4>Serveur local</h4>
+          <p>Ton propre serveur. Filesystem local. Zero cloud si tu veux. Vraie souverainete.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUARANTEES -->
+  <section id="guarantees" style="background:var(--surface)">
+    <div class="container">
+      <div class="s-label">Garanties</div>
+      <h2 class="s-title">Ce que ton espace te garantit.</h2>
+      <div class="guarantees">
+        <div class="guar">
+          <div class="guar-icon">&#128274;</div>
+          <div>
+            <h4>Chiffrement AES-256-GCM</h4>
+            <p>Toute ta memoire est chiffree au repos. Cle de chiffrement sous ton controle, pas le notre.</p>
+          </div>
+        </div>
+        <div class="guar">
+          <div class="guar-icon">&#127381;</div>
+          <div>
+            <h4>Export total en 1 clic</h4>
+            <p>Toute ta memoire, tous tes agents, toutes tes preferences -- exportables en JSON standard, n'importe quand.</p>
+          </div>
+        </div>
+        <div class="guar">
+          <div class="guar-icon">&#128683;</div>
+          <div>
+            <h4>Zero training avec tes donnees</h4>
+            <p>Tes conversations n'entrainent jamais nos modeles. Structurellement impossible -- on ne les voit pas.</p>
+          </div>
+        </div>
+        <div class="guar">
+          <div class="guar-icon">&#127760;</div>
+          <div>
+            <h4>W3C DIDs -- Identite decentralisee</h4>
+            <p>Ton identite numerique sous forme d'identifiant decentralise. Portable, souverain, independant.</p>
+          </div>
+        </div>
+        <div class="guar">
+          <div class="guar-icon">&#128064;</div>
+          <div>
+            <h4>Reality Anchor -- Protection memoire</h4>
+            <p>Garde-fou structural contre la manipulation de memoire. Seul systeme qui protege la couche relationnelle L5.</p>
+          </div>
+        </div>
+        <div class="guar">
+          <div class="guar-icon">&#128220;</div>
+          <div>
+            <h4>Audit trail complet</h4>
+            <p>Chaque acces a ta memoire est logue. Qui a accede, quand, pourquoi. Transparent et verifiable.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="wl-section" style="text-align:center;padding:5rem 0;background:radial-gradient(ellipse at center,rgba(247,37,133,0.06) 0%,transparent 60%)">
+    <div class="container">
+      <h2 class="s-title" style="text-align:center">Ton espace t'attend.</h2>
+      <p style="color:var(--text2);margin-bottom:2rem">Rejoins la liste d'attente. Sois parmi les premiers a activer MonIAaMoi avec memoire souveraine.</p>
+      <form class="wl" onsubmit="return wl(event,this)" id="wl-form">
+        <input type="email" name="email" placeholder="ton@email.com" required aria-label="Email">
+        <button type="submit" class="btn btn-p">Rejoindre &#8594;</button>
+      </form>
+      <p class="wl-msg" id="wl-msg" style="display:none"></p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="domains">
+        <a href="https://polpai.ai">polpai.ai</a>
+        <a href="https://polpai.com">polpai.com</a>
+        <a href="https://polpai.io">polpai.io</a>
+        <a href="https://polpai.bot">polpai.bot</a>
+        <a href="https://polpai.xyz">polpai.xyz</a>
+        <a href="https://polpai.space" class="active">polpai.space</a>
+        <a href="https://polpai.online">polpai.online</a>
+      </div>
+      <p>PolpAI Space. Ton IA. Ta memoire. Ta souverainete.</p>
+    </div>
+  </footer>
+
+  <script>
+    function wl(e,f){
+      e.preventDefault();
+      const em=f.email.value.trim(),m=document.getElementById('wl-msg');
+      const s=JSON.parse(localStorage.getItem('polpai_wl')||'[]');
+      s.push(em);localStorage.setItem('polpai_wl',JSON.stringify(s));
+      m.textContent='Bienvenue. Un tentacule va te contacter.';m.className='wl-msg ok';m.style.display='inline-block';
+      f.reset();setTimeout(()=>{m.style.display='none'},5000);return false;
+    }
+  </script>
+</body>
+</html>
